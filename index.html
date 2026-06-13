@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>MOI Qatar Traffic Violation System | Official Guide & Fine Management</title>
+  <!-- Google Fonts + Font Awesome for crisp icons & brand typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #F8FAFE;
+      color: #111827;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* FULL WIDTH container with modern brand-driven palette */
+    :root {
+      --primary-deep: #8B1E3F;    /* Qatari maroon/brand elegance */
+      --primary-burgundy: #A12A4A;
+      --secondary-gold: #C9A03D;
+      --accent-teal: #1E6F5C;
+      --neutral-100: #F9FBFD;
+      --neutral-800: #1F2937;
+      --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+      --shadow-md: 0 20px 25px -12px rgba(0, 0, 0, 0.08);
+      --transition-default: all 0.25s ease;
+    }
+
+    /* full width layout */
+    .container-full {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* ========= HEADER ========= */
+    .site-header {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(2px);
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.03);
+      border-bottom: 1px solid #E9EEF4;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+    }
+
+    .header-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 16px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      background: var(--primary-deep);
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 22px;
+      box-shadow: 0 8px 14px -8px rgba(139, 30, 63, 0.3);
+    }
+
+    .brand-text h1 {
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      background: linear-gradient(135deg, #8B1E3F 0%, #A12A4A 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .brand-text span {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #5C6A7A;
+      letter-spacing: 0.3px;
+    }
+
+    .header-cta {
+      background: var(--primary-deep);
+      border-radius: 60px;
+      transition: var(--transition-default);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .header-cta:hover {
+      background: #6F1735;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 20px -12px rgba(139,30,63,0.4);
+    }
+
+    .header-cta a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 24px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: white;
+      text-decoration: none;
+      letter-spacing: -0.2px;
+    }
+
+    .header-cta a i {
+      font-size: 1rem;
+    }
+
+    /* ===== hero / intro section with first link ===== */
+    .hero-section {
+      background: linear-gradient(112deg, #FFFFFF 0%, #F5F7FC 100%);
+      padding: 48px 0 56px 0;
+      border-bottom: 1px solid #EFF3F9;
+    }
+
+    .hero-grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .hero-content {
+      flex: 1.4;
+    }
+
+    .hero-badge {
+      background: #F1E6EA;
+      color: var(--primary-deep);
+      font-weight: 600;
+      font-size: 0.8rem;
+      padding: 5px 12px;
+      border-radius: 40px;
+      display: inline-block;
+      margin-bottom: 20px;
+      letter-spacing: 0.3px;
+    }
+
+    .hero-content h2 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      background: linear-gradient(to right, #0F172A, #2D3A4B);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 20px;
+    }
+
+    .hero-desc {
+      font-size: 1.18rem;
+      color: #2C3E4E;
+      max-width: 90%;
+      margin-bottom: 28px;
+      font-weight: 400;
+    }
+
+    .primary-link-card {
+      background: white;
+      border-radius: 28px;
+      padding: 4px;
+      display: inline-flex;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid #E9EDF2;
+      transition: var(--transition-default);
+    }
+
+    .primary-link-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: #D4DCE8;
+      transform: translateY(-2px);
+    }
+
+    .primary-link-card a {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #ffffff;
+      padding: 14px 32px 14px 26px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--primary-deep);
+    }
+
+    .primary-link-card a i {
+      font-size: 1.3rem;
+      color: var(--secondary-gold);
+    }
+
+    .primary-link-card .link-url {
+      font-family: monospace;
+      font-weight: 500;
+      background: #F3F5F9;
+      padding: 6px 12px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      color: #1F3A4B;
+    }
+
+    .hero-image {
+      flex: 1;
+      text-align: right;
+    }
+
+    .hero-image img {
+      max-width: 100%;
+      border-radius: 32px;
+      box-shadow: 0 25px 45px -18px rgba(0,0,0,0.2);
+    }
+
+    /* body sections */
+    .section {
+      padding: 64px 0;
+      width: 100%;
+      border-bottom: 1px solid #EFF2F8;
+    }
+
+    .section-light {
+      background-color: #FFFFFF;
+    }
+
+    .section-alt {
+      background: #FCFDFF;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      margin-bottom: 16px;
+      color: #0E1C2C;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 70px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-deep), var(--secondary-gold));
+      border-radius: 4px;
+    }
+
+    .section-subhead {
+      font-size: 1.1rem;
+      color: #4B5A6B;
+      margin-bottom: 48px;
+      max-width: 700px;
+    }
+
+    .grid-2col {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .info-card {
+      background: white;
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.03);
+      border: 1px solid #EDF2F7;
+      transition: all 0.2s;
+    }
+
+    .info-card:hover {
+      border-color: #DCE4EE;
+      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.08);
+    }
+
+    .violation-table-wrapper {
+      overflow-x: auto;
+      border-radius: 24px;
+      background: white;
+      border: 1px solid #EEF2F8;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.02);
+    }
+
+    .violation-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .violation-table th {
+      background: #F9FBFE;
+      padding: 18px 20px;
+      text-align: left;
+      font-weight: 600;
+      color: #1A2C3E;
+      border-bottom: 1px solid #E4E9F0;
+    }
+
+    .violation-table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid #F0F3F8;
+      color: #253745;
+    }
+
+    .badge-impact {
+      background: #FEF3E8;
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.8rem;
+    }
+
+    .benefits-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .benefit-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #F8FAFE;
+      padding: 12px 20px;
+      border-radius: 60px;
+    }
+
+    .benefit-item i {
+      font-size: 1.6rem;
+      color: var(--primary-burgundy);
+    }
+
+    .future-note {
+      background: linear-gradient(115deg, #F4F7FC 0%, #FFFFFF 100%);
+      padding: 32px;
+      border-radius: 32px;
+      border-left: 5px solid var(--secondary-gold);
+    }
+
+    /* FOOTER */
+    .site-footer {
+      background: #0E1C2C;
+      color: #CFDDEB;
+      padding: 48px 0 32px;
+      width: 100%;
+    }
+
+    .footer-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand p {
+      max-width: 280px;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .footer-social h4, .footer-links h4 {
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: white;
+      font-size: 1rem;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 20px;
+    }
+
+    .social-icons a {
+      background: rgba(255,255,255,0.08);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+      color: #CFDDEB;
+      font-size: 1.2rem;
+    }
+
+    .social-icons a:hover {
+      background: var(--primary-deep);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      border-top: 1px solid #1F3347;
+      padding-top: 24px;
+      text-align: center;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 768px) {
+      .container-full {
+        padding: 0 20px;
+      }
+      .hero-content h2 {
+        font-size: 2rem;
+      }
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .hero-desc {
+        max-width: 100%;
+      }
+      .section-title {
+        font-size: 1.8rem;
+      }
+    }
+
+    a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container-full">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-icon">
+          <i class="fas fa-traffic-light"></i>
+        </div>
+        <div class="brand-text">
+          <h1>MOI Qatar | Traffic Violation System</h1>
+          <span>Ministry of Interior – Digital Traffic Management</span>
+        </div>
+      </div>
+      <div class="header-cta">
+        <a href="https://moitrafficviolation.org/" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-external-link-alt"></i> Official Portal: moitrafficviolation.org
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Hero section + FIRST LINK (embedded with anchor as required) -->
+  <section class="hero-section">
+    <div class="container-full">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge"><i class="fas fa-shield-alt"></i> Qatar Digital Traffic Services</div>
+          <h2>Check & Manage Traffic Violations <br> Smart, Fast & Transparent</h2>
+          <p class="hero-desc">Stay informed, drive responsibly, and manage fines seamlessly through the official MOI Qatar platform. Real-time access to your driving record, penalty monitoring, and road safety insights.</p>
+          <!-- FIRST LINK: brand anchor with required URL exactly as specified -->
+          <div class="primary-link-card">
+            <a href="https://moitrafficviolation.org/" target="_blank" rel="noopener noreferrer">
+              <i class="fas fa-gavel"></i> 
+              <span>Access MOI Traffic Violation Portal →</span>
+              <span class="link-url">https://moitrafficviolation.org/</span>
+            </a>
+          </div>
+          <p style="margin-top: 18px; font-size: 0.85rem; color: #5A6E7C;"><i class="fas fa-check-circle" style="color: #1E6F5C;"></i> Official source – Check fines, plate violations & driving records</p>
+        </div>
+        <div class="hero-image">
+          <!-- modern abstract traffic illustration (SVG decorative) -->
+          <img src="https://placehold.co/500x360/F3F5FA/8B1E3F?text=Qatar+Smart+Traffic&font=Inter" alt="Qatar Traffic Management" style="background: linear-gradient(145deg,#F0F4FA,#FFFFFF); border-radius: 32px; object-fit: cover;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Understanding the System Section -->
+  <section class="section section-light">
+    <div class="container-full">
+      <h3 class="section-title">Understanding MOI Qatar Traffic Violation System</h3>
+      <p class="section-subhead">How digital enforcement promotes road safety, transparency, and accountability across Qatar.</p>
+      <div class="grid-2col">
+        <div class="info-card">
+          <i class="fas fa-radar" style="font-size: 2.2rem; color: #8B1E3F; margin-bottom: 16px; display: inline-block;"></i>
+          <h4 style="margin-bottom: 12px;">Integrated digital records</h4>
+          <p>Violations like speeding, red-light running, and mobile usage are recorded instantly. Access history anytime via MOI platforms, ensuring drivers stay informed about penalties and demerit points.</p>
+        </div>
+        <div class="info-card">
+          <i class="fas fa-chart-line" style="font-size: 2.2rem; color: #C9A03D; margin-bottom: 16px;"></i>
+          <h4 style="margin-bottom: 12px;">Real-time fine management</h4>
+          <p>Transparent process to review fines, avoid accumulation, and maintain clean records. Business fleets & individual owners reduce operational risks with regular checks.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Common Violations Table + categories (fully professional) -->
+  <section class="section section-alt">
+    <div class="container-full">
+      <h3 class="section-title">Traffic Violation Categories & Impact Matrix</h3>
+      <p class="section-subhead">Key offenses and associated consequences under Qatar traffic law.</p>
+      <div class="violation-table-wrapper">
+        <table class="violation-table">
+          <thead>
+            <tr><th>Violation Category</th><th>Potential Impact</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>🚗 Speed limit violations</td><td><span class="badge-impact">Financial penalties + record entries</span></td></tr>
+            <tr><td>🔴 Red light violations</td><td><span class="badge-impact">Higher fines & stricter consequences</span></td></tr>
+            <tr><td>🅿️ Parking offenses</td><td><span class="badge-impact">Monetary penalties</span></td></tr>
+            <tr><td>📱 Mobile phone usage while driving</td><td><span class="badge-impact">Safety-related penalties & black points</span></td></tr>
+            <tr><td>🪑 Seatbelt violations</td><td><span class="badge-impact">Traffic citations</span></td></tr>
+            <tr><td>⚠️ Reckless driving behavior</td><td><span class="badge-impact">Significant legal consequences</span></td></tr>
+            <tr><td>📄 Driving without required documentation</td><td><span class="badge-impact">Administrative penalties</span></td></tr>
+            <tr><td>🗓️ Vehicle registration violations</td><td><span class="badge-impact">Compliance-related fines</span></td></tr>
+            <tr><td>🚦 Traffic signal & lane discipline</td><td><span class="badge-impact">Traffic enforcement measures</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top: 24px; font-size: 0.9rem;">Violation severity depends on nature and frequency — consistent monitoring reduces risks.</p>
+    </div>
+  </section>
+
+  <!-- Why Monitoring Matters + Benefits of online services -->
+  <section class="section section-light">
+    <div class="container-full">
+      <div class="grid-2col" style="gap: 48px;">
+        <div>
+          <h3 class="section-title" style="margin-bottom: 24px;">Why Monitoring Matters</h3>
+          <p style="margin-bottom: 20px;">Regular violation checks prevent unexpected penalties, improve driving habits, and strengthen road safety culture. For businesses operating commercial fleets, monitoring ensures compliance, driver accountability, and reduces operational liability.</p>
+          <p>A clean driving record supports insurance benefits, legal peace of mind, and safer communities.</p>
+          <div style="margin-top: 32px;">
+            <i class="fas fa-mobile-alt" style="color: #8B1E3F; margin-right: 8px;"></i> <strong>Digital accessibility:</strong> Instant violation lookup 24/7.
+          </div>
+        </div>
+        <div>
+          <h3 class="section-title" style="margin-bottom: 24px;">Benefits of Online Services</h3>
+          <div class="benefits-list">
+            <div class="benefit-item"><i class="fas fa-bolt"></i> Faster access</div>
+            <div class="benefit-item"><i class="fas fa-chart-simple"></i> Improved transparency</div>
+            <div class="benefit-item"><i class="fas fa-file-invoice"></i> Reduced paperwork</div>
+            <div class="benefit-item"><i class="fas fa-clock"></i> Time efficiency</div>
+          </div>
+          <p class="info-card" style="margin-top: 20px;">MOI’s digital transformation reduces government visits, allowing drivers to resolve issues promptly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Strategies for Avoiding Violations + Technology (Modern Enforcement) -->
+  <section class="section section-alt">
+    <div class="container-full">
+      <h3 class="section-title">Strategies for Avoiding Traffic Violations & Smart Enforcement</h3>
+      <p class="section-subhead">Responsible driving + cutting-edge automated systems = safer roads for all.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 32px;">
+        <div style="flex:1; background: white; border-radius: 28px; padding: 28px;">
+          <i class="fas fa-lightbulb" style="font-size: 2rem; color: #C9A03D;"></i>
+          <h4 style="margin: 16px 0 12px;">Drive with awareness</h4>
+          <p>Observe speed limits, avoid distractions, maintain valid documentation, and keep up with vehicle inspections. Defensive driving cuts violation risk by 70%.</p>
+        </div>
+        <div style="flex:1; background: white; border-radius: 28px; padding: 28px;">
+          <i class="fas fa-camera" style="font-size: 2rem; color: #1E6F5C;"></i>
+          <h4 style="margin: 16px 0 12px;">Automated radar & AI cameras</h4>
+          <p>Qatar’s smart traffic enforcement uses AI-monitored cameras for red lights, speeding, and mobile usage. Accurate, consistent, and reduces human error.</p>
+        </div>
+        <div style="flex:1; background: white; border-radius: 28px; padding: 28px;">
+          <i class="fas fa-charging-station" style="font-size: 2rem; color: #8B1E3F;"></i>
+          <h4 style="margin: 16px 0 12px;">Maintain clean record</h4>
+          <p>Regular check-ups on MOI portal help avoid accumulative fines and legal actions. Professional drivers benefit from solid history.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Future of Traffic Management in Qatar -->
+  <section class="section section-light">
+    <div class="container-full">
+      <div class="future-note">
+        <i class="fas fa-city" style="font-size: 2.2rem; color: #8B1E3F; margin-bottom: 12px; display: block;"></i>
+        <h3 style="font-size: 1.7rem; font-weight: 700;">The Future of Traffic Management in Qatar</h3>
+        <p style="margin-top: 12px; font-size: 1.05rem;">Qatar's smart city vision integrates Intelligent Transportation Systems (ITS), AI traffic analytics, and seamless digital government services. Upcoming expansions include real-time violation alerts, predictive road safety modules, and unified driving record platforms.</p>
+        <p style="margin-top: 12px;">The modernization reflects Qatar National Vision 2030, promoting sustainability, safety, and innovation. MOI continues to lead regional standards for traffic transparency.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conclusion - Final reminder of responsible driving -->
+  <section class="section section-alt" style="border-bottom: none;">
+    <div class="container-full" style="text-align: center; max-width: 900px; margin: 0 auto;">
+      <i class="fas fa-shield-heart" style="font-size: 3rem; color: var(--primary-deep); margin-bottom: 16px;"></i>
+      <h3 style="font-size: 1.8rem; font-weight: 700;">Drive Safely. Stay Compliant.</h3>
+      <p style="margin: 20px 0 28px;">The MOI Qatar traffic violation system empowers every driver to take control of their road safety record. Check regularly, respect traffic rules, and contribute to safer roads across the nation.</p>
+      <div style="display: inline-flex; background: white; border-radius: 100px; padding: 4px; box-shadow: var(--shadow-sm);">
+        <a href="https://moitrafficviolation.org/" target="_blank" style="background: var(--primary-deep); color: white; padding: 12px 32px; border-radius: 40px; font-weight: 600;">Check Violations Now <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER with social links -->
+<footer class="site-footer">
+  <div class="container-full">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <i class="fas fa-traffic-slow" style="font-size: 28px; color: #C9A03D;"></i>
+          <span style="font-weight: 700; font-size: 1.25rem; color: white;">MOI Qatar Traffic</span>
+        </div>
+        <p>Official reference for violation checking, fine management & road safety guidelines — Ministry of Interior, State of Qatar.</p>
+      </div>
+      <div class="footer-social">
+        <h4>Follow Official Channels</h4>
+        <div class="social-icons">
+          <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p style="margin-top: 14px; font-size: 0.8rem;">Ministry of Interior Digital Services</p>
+      </div>
+      <div class="footer-links">
+        <h4>Resources</h4>
+        <ul style="list-style: none; margin-top: 8px;">
+          <li style="margin-bottom: 8px;"><a href="#" style="color:#CFDDEB;">Traffic Law Portal</a></li>
+          <li style="margin-bottom: 8px;"><a href="#" style="color:#CFDDEB;">Fine Payment Guide</a></li>
+          <li><a href="https://moitrafficviolation.org/" style="color:#CFDDEB;">MOI Violation Check</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>© 2026 Ministry of Interior – Qatar | All information provided for official traffic awareness & fine management. Stay safe.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
